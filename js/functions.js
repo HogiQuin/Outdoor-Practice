@@ -4,7 +4,7 @@ var modalWidth = 0;
 var modalHeight = 0;
 var width = 0;
 var widthWindow = window.innerWidth;
-var cookie;
+var cookie = 0;
 
 var products = '{ "status" : 0,"products" : [{"id" : 1,"name" : "Super Backpack Predator","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 45.99,"image" : "2001_001.png"},{ "id" : 2,"name" : "Super Backpack Goat","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 60.00,"image" : "2002_001.png"},{ "id" : 3,"name" : "Super Backpack Xtreme Goat","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 50.00,"image" : "2003_001.png"},{ "id" : 4,"name" : "Outdoor Backpack","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 40.00,"image" : "2004_001.png"},{ "id" : 5,"name" : "Outdoor Backpack lite","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 30.00,"image" : "2005_001.png"},{ "id" : 6,"name" : "Mountain Backpack","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 120.00,"image" : "2006_001.png"},{ "id" : 7,"name" : "Xtreme Lak","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 80.00,"image" : "2007_001.png"},{ "id" : 8,"name" : "Waterproof Backpack","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 50.00,"image" : "2008_001.png"},{ "id" : 9,"name" : "Outdoor X","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 90.00,"image" : "2009_001.png"},{ "id" : 10,"name" : "Kids Backpack","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 45.00,"image" : "2010_001.png"},{ "id" : 11,"name" : "Outdoor Sleeping","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 80.99,"image" : "2011_001.png"},{ "id" : 12,"name" : "X-Treme backpack","description" : "Translate offers both professional human and machine translations between 75 languages. Translators can also edit paid jobs via our online portal.","price" : 99.99,"image" : "2012_001.png"}]}';
 
@@ -192,18 +192,22 @@ function backPage(){
 
 function loadProductDetail(id){
   window.location = 'product-detail.html';
-  setValue(id*1);
+  document.cookie = id;
+  
 }
 function loadProduct(){
-  console.log(getValue());
-}
+  var x = document.cookie;
+  var product = jsonProducts.products[x-1];
+  var divTitle = document.getElementById('p-title');
+  var imgImg = document.getElementById('p-image-img');
+  var divPrice = document.getElementById('p-price');
+  var divDesc = document.getElementById('p-description');
 
-function setValue(value){
-  cookie = value;
-}
+  imgImg.src = 'products/'+product.image;
 
-function getValue(){
-  return window.cookie;
+  divTitle.innerHTML = product.name;
+  divPrice.innerHTML = toCurrency(product.price);
+  divDesc.innerHTML = product.description;
 }
 
 
